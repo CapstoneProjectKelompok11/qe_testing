@@ -55,7 +55,7 @@ public class PostRegister {
                 .when().post(setPostEndpointRegister());
     }
 
-    @Step("I validate the status code is {int}")
+    @Step("I validate the status code for register is {int}")
     public void validateStatusCode(int statusCode){
         SerenityRest.then().statusCode(equalTo(statusCode));
     }
@@ -77,12 +77,6 @@ public class PostRegister {
     public String getTimestamp() {
         Response response = SerenityRest.lastResponse();
         String timestamp = response.body().path("timestamp");
-        try (FileWriter file = new FileWriter("src//test//resources//filejson//timestamp.json")) {
-            file.write(timestamp);
-            file.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         System.out.println("Timestamp: " + timestamp);
         return timestamp;
     }
