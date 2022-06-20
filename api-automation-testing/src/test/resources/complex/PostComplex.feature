@@ -3,6 +3,10 @@ Feature: Complex
   I want to create data complex
   So that I can add data complex
 
+  Background:
+    Given I have logged in as admin
+    And I get token admin for the request
+
   Scenario Outline: POST - As an admin I have to be able to crete data complex
     Given I set an endpoint for POST complex
     When I request POST detail complex with "<statusAuthorize>" and input "<complex>" and <cityId>

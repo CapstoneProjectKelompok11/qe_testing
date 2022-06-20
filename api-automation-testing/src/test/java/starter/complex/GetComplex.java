@@ -16,7 +16,7 @@ public class GetComplex {
         if (city.equals("")) {
             return base_url + "/complex";
         } else {
-            return base_url + "/complex?City={city}";
+            return base_url + "/complex?city={city}";
         }
     }
 

@@ -37,7 +37,7 @@ public class PostComplex {
                     .body(requestData.toJSONString())
                     .when().post(setPostEndpointComplex());
         } else {
-            this.token = FileUtils.readFileToString(new File(System.getProperty("user.dir") + "//src//test//resources//filejson//tokenAdmin.json"), StandardCharsets.UTF_8);
+            this.token = FileUtils.readFileToString(new File(System.getProperty("user.dir") + "//src//test//resources//filejson//adminToken.json"), StandardCharsets.UTF_8);
             JSONObject requestData = new JSONObject();
             requestData.put("complex_name", this.complex);
 
@@ -62,11 +62,15 @@ public class PostComplex {
             SerenityRest.then().body("status", equalTo(403));
             SerenityRest.then().body("error", equalTo("Forbidden"));
             SerenityRest.then().body("path", equalTo("/api/admin/complex"));
-        } else {
-            SerenityRest.then().body("status.code", equalTo("SUCCESS"));
-            SerenityRest.then().body("status.message", equalTo("Success!"));
+        } else if (message.equals("success")){
+            SerenityRest.then().body("status.code", equalTo(getStatusCode()));
+            SerenityRest.then().body("status.message", equalTo(getStatusMessage()));
             SerenityRest.then().body("data.id", equalTo(getDataID()));
             SerenityRest.then().body("data.complex_name", equalTo(this.complex));
+        } else {
+            SerenityRest.then().body("status.code", equalTo(getStatusCode()));
+            SerenityRest.then().body("status.message", equalTo(getStatusMessage()));
+            SerenityRest.then().body("data", equalTo(null));
         }
     }
 
@@ -76,6 +80,22 @@ public class PostComplex {
         String timestamp = response.body().path("timestamp");
         System.out.println("Timestamp: " + timestamp);
         return timestamp;
+    }
+
+    @Step("get status code from the response")
+    public String getStatusCode() {
+        Response response = SerenityRest.lastResponse();
+        String statusCode = response.body().path("status.code");
+        System.out.println("Status code: " + statusCode);
+        return statusCode;
+    }
+
+    @Step("get status message from the response")
+    public String getStatusMessage() {
+        Response response = SerenityRest.lastResponse();
+        String statusMessage = response.body().path("status.message");
+        System.out.println("Status message: " + statusMessage);
+        return statusMessage;
     }
 
     @Step("get data id from the response")
