@@ -43,8 +43,8 @@ public class PostRegister {
         this.password = password;
 
         JSONObject requestData = new JSONObject();
-        requestData.put("firstName", this.firstname);
-        requestData.put("lastName", this.lastname);
+        requestData.put("first_name", this.firstname);
+        requestData.put("last_name", this.lastname);
         requestData.put("phone", this.phone);
         requestData.put("email", this.email);
         requestData.put("password", this.password);
@@ -79,13 +79,5 @@ public class PostRegister {
         String timestamp = response.body().path("timestamp");
         System.out.println("Timestamp: " + timestamp);
         return timestamp;
-    }
-
-    @Step("get error message from the response")
-    public String getErrorMessage() {
-        Response response = SerenityRest.lastResponse();
-        String errorMessage = response.body().path("data");
-        System.out.println("Error message: " + errorMessage);
-        return errorMessage;
     }
 }

@@ -33,7 +33,7 @@ public class PostLogin {
         } else if (email.equals("not existed")) {
             this.email = general.randomEmail();
         } else {
-            this.email = "";
+            this.email = email;
         }
         this.password = password;
 
@@ -86,11 +86,17 @@ public class PostLogin {
         return token;
     }
 
-    @Step("get error message from the response")
-    public String getErrorMessage() {
+    @Step("get admin token from the response")
+    public String getAdminToken() {
         Response response = SerenityRest.lastResponse();
-        String errorMessage = response.body().path("data");
-        System.out.println("Error message: " + errorMessage);
-        return errorMessage;
+        String adminToken = response.body().path("data.token");
+        try (FileWriter file = new FileWriter("src//test//resources//filejson//adminToken.json")) {
+            file.write(adminToken);
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Admin token: " + adminToken);
+        return adminToken;
     }
 }
