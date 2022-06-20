@@ -53,13 +53,12 @@ public class GetFloor {
     public String getDataImage() {
         Response response = SerenityRest.lastResponse();
         String dataImage = response.body().path("data[0].image");
-        try (FileWriter file = new FileWriter("src//test//resources//filejson//dataImage.json")) {
+        try (FileWriter file = new FileWriter("src//test//resources//filejson//floorImage.json")) {
             file.write(dataImage);
             file.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        System.out.println("Image: " + dataImage);
         return dataImage;
     }
 

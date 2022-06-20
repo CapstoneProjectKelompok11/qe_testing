@@ -38,23 +38,23 @@ public class FloorSteps {
         getFloor.validateTheDataDetailsOfFloor(message);
     }
 
-    @Given("I set an endpoint for GET image")
-    public void iSetAnEndpointForGETImage() {
+    @Given("I set an endpoint for GET floor image")
+    public void iSetAnEndpointForGETFloorImage() {
         getFloorImage.setGetEndpointImage();
     }
 
-    @When("I request GET detail image with input {string}")
-    public void iRequestGETDetailImageWithInput(String image) throws IOException {
-        getFloorImage.requestGetDetailImage(image);
+    @When("I request GET detail floor image with input {string}")
+    public void iRequestGETDetailFloorImageWithInput(String filename) throws IOException {
+        getFloorImage.requestGetDetailImage(filename);
     }
 
-    @Then("I validate the status code for get image is {int}")
-    public void iValidateTheStatusCodeForGetImageIsStatusCode(int statusCode) {
+    @Then("I validate the status code for get floor image is {int}")
+    public void iValidateTheStatusCodeForGetFloorImageIsStatusCode(int statusCode) {
         getFloorImage.validateTheStatusCode(statusCode);
     }
 
-    @And("validate the {string} and data details")
-    public void validateTheAndDataDetails(String message) {
-        getFloorImage.validateTheDataDetails(message);
+    @And("validate the {string} and data floor image")
+    public void validateTheAndDataFloorImage(String message) {
+        getFloorImage.validateTheDataDetailsOfFloorImage(message);
     }
 }

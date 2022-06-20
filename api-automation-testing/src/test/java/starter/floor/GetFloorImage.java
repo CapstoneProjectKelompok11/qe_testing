@@ -18,16 +18,16 @@ public class GetFloorImage {
 
     private String filename;
 
-    @Step("I set an endpoint for GET image")
+    @Step("I set an endpoint for GET floor image")
     public String setGetEndpointImage() {
         return base_url + "/floor/image/{filename}";
     }
 
-    @Step("I request GET detail image")
-    public void requestGetDetailImage(String image) throws IOException {
-        if (image.equals("valid")) {
-            this.filename = FileUtils.readFileToString(new File(System.getProperty("user.dir") + "//src//test//resources//filejson//dataImage.json"), StandardCharsets.UTF_8);
-        } else if (image.equals("invalid")) {
+    @Step("I request GET detail floor image")
+    public void requestGetDetailImage(String filename) throws IOException {
+        if (filename.equals("valid")) {
+            this.filename = FileUtils.readFileToString(new File(System.getProperty("user.dir") + "//src//test//resources//filejson//floorImage.json"), StandardCharsets.UTF_8);
+        } else if (filename.equals("invalid")) {
             this.filename = "abc";
         } else {
             this.filename = "";
@@ -39,13 +39,13 @@ public class GetFloorImage {
                 .when().get(setGetEndpointImage());
     }
 
-    @Step("I validate the status code is for get image is {int}")
+    @Step("I validate the status code is for get floor image is {int}")
     public void validateTheStatusCode(int statusCode) {
         SerenityRest.then().statusCode(equalTo(statusCode));
     }
 
-    @Step("validate the data details")
-    public void validateTheDataDetails(String message) {
+    @Step("validate the data details of floor image")
+    public void validateTheDataDetailsOfFloorImage(String message) {
         if (message.equals("success")) {
             SerenityRest.then().body(notNullValue());
         } else if (message.equals("not found")) {
