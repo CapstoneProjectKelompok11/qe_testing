@@ -36,7 +36,7 @@ public class PostCity {
                     .body(requestData.toJSONString())
                     .when().post(setPostEndpointCity());
         } else {
-            this.token = FileUtils.readFileToString(new File(System.getProperty("user.dir") + "//src//test//resources//filejson//tokenAdmin.json"), StandardCharsets.UTF_8);
+            this.token = FileUtils.readFileToString(new File(System.getProperty("user.dir") + "//src//test//resources//filejson//adminToken.json"), StandardCharsets.UTF_8);
             JSONObject requestData = new JSONObject();
             requestData.put("city_name", this.city);
 

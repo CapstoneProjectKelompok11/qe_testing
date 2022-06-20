@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
+import starter.auth.PostLogin;
 import starter.city.GetCity;
 import starter.city.PostCity;
 
@@ -13,10 +14,25 @@ import java.io.IOException;
 public class CitySteps {
 
     @Steps
+    PostLogin postLogin;
+
+    @Steps
     GetCity getCity;
 
     @Steps
     PostCity postCity;
+
+    @Given("I have logged in as admin")
+    public void iHaveLoggedInAsAdmin() throws Exception {
+        postLogin.setPostEndpointLogin();
+        postLogin.requestPostDetailLogin("testingqe3@gmail.com", "testing123*");
+        postLogin.validateStatusCode(200);
+    }
+
+    @And("I get token admin for the request")
+    public void iGetTokenAdminForTheRequest() {
+        postLogin.getAdminToken();
+    }
 
     @Given("I set an endpoint for GET city")
     public void iSetAnEndpointForGETCity() {
