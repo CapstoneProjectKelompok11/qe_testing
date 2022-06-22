@@ -7,6 +7,7 @@ import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import starter.floor.GetFloor;
 import starter.floor.GetFloorImage;
+import starter.floor.PostFloor;
 
 import java.io.IOException;
 
@@ -17,6 +18,9 @@ public class FloorSteps {
 
     @Steps
     GetFloorImage getFloorImage;
+
+    @Steps
+    PostFloor postFloor;
 
     @Given("I set an endpoint for GET floor")
     public void iSetAnEndpointForGETFloor() {
@@ -56,5 +60,25 @@ public class FloorSteps {
     @And("validate the {string} and data floor image")
     public void validateTheAndDataFloorImage(String message) {
         getFloorImage.validateTheDataDetailsOfFloorImage(message);
+    }
+
+    @Given("I set an endpoint for POST floor")
+    public void iSetAnEndpointForPOSTFloor() {
+        postFloor.setPostEndpointFloor();
+    }
+
+    @When("I request POST detail floor with {string}, input {int}, {string}, {string}, {string}, {int}, {int} and {string}")
+    public void iRequestPOSTDetailFloorWithInputAnd(String status, int buildingId, String name, String type, String floor_size, int max_capacity, int starting_price, String facilities) throws IOException {
+        postFloor.requestPostDetailFloor(status, buildingId, name, type, floor_size, max_capacity, starting_price, facilities);
+    }
+
+    @Then("I validate the status code for post floor is {int}")
+    public void iValidateTheStatusCodeForPostFloorIsStatusCode(int statusCode) {
+        postFloor.validateStatusCode(statusCode);
+    }
+
+    @And("validate the {string} and data details after post floor")
+    public void validateTheAndDataDetailsAfterPostFloor(String message) {
+        postFloor.validateDataDetailAfterPostFloor(message);
     }
 }
