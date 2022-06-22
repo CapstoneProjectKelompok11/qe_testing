@@ -29,8 +29,8 @@ public class CitySteps {
         postLogin.validateStatusCode(200);
     }
 
-    @And("I get token admin for the request")
-    public void iGetTokenAdminForTheRequest() {
+    @And("I get token admin from the response")
+    public void iGetTokenAdminFromTheResponse() {
         postLogin.getAdminToken();
     }
 

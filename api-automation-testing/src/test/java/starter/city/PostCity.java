@@ -26,20 +26,18 @@ public class PostCity {
 
     @Step("I request POST detail city")
     public void requestPostDetailCity(String status, String city) throws IOException {
+        this.token = FileUtils.readFileToString(new File(System.getProperty("user.dir") + "//src//test//resources//filejson//adminToken.json"), StandardCharsets.UTF_8);
         this.city = city;
-        if (status.equals("not authorized")) {
-            JSONObject requestData = new JSONObject();
-            requestData.put("city_name", this.city);
 
+        JSONObject requestData = new JSONObject();
+        requestData.put("city_name", this.city);
+
+        if (status.equals("not authorized")) {
             SerenityRest.given()
                     .header("Content-Type", "application/json")
                     .body(requestData.toJSONString())
                     .when().post(setPostEndpointCity());
         } else {
-            this.token = FileUtils.readFileToString(new File(System.getProperty("user.dir") + "//src//test//resources//filejson//adminToken.json"), StandardCharsets.UTF_8);
-            JSONObject requestData = new JSONObject();
-            requestData.put("city_name", this.city);
-
             SerenityRest.given()
                     .header("Content-Type", "application/json")
                     .header("Authorization", "Bearer " + this.token)
