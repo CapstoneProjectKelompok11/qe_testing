@@ -25,22 +25,20 @@ public class PostComplex {
 
     @Step("I request POST detail complex")
     public void requestPostDetailComplex(String status, String complex, int cityId) throws IOException {
+        this.token = FileUtils.readFileToString(new File(System.getProperty("user.dir") + "//src//test//resources//filejson//adminToken.json"), StandardCharsets.UTF_8);
         this.cityId = cityId;
         this.complex = complex;
-        if (status.equals("not authorized")) {
-            JSONObject requestData = new JSONObject();
-            requestData.put("complex_name", this.complex);
 
+        JSONObject requestData = new JSONObject();
+        requestData.put("complex_name", this.complex);
+
+        if (status.equals("not authorized")) {
             SerenityRest.given()
                     .header("Content-Type", "application/json")
                     .pathParam("cityId", this.cityId)
                     .body(requestData.toJSONString())
                     .when().post(setPostEndpointComplex());
         } else {
-            this.token = FileUtils.readFileToString(new File(System.getProperty("user.dir") + "//src//test//resources//filejson//adminToken.json"), StandardCharsets.UTF_8);
-            JSONObject requestData = new JSONObject();
-            requestData.put("complex_name", this.complex);
-
             SerenityRest.given()
                     .header("Content-Type", "application/json")
                     .header("Authorization", "Bearer " + this.token)
