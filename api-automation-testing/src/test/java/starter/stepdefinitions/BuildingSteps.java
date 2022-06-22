@@ -7,6 +7,7 @@ import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import starter.building.GetBuilding;
 import starter.building.GetBuildingImage;
+import starter.building.PostBuilding;
 import starter.floor.GetFloor;
 import starter.floor.GetFloorImage;
 
@@ -19,6 +20,9 @@ public class BuildingSteps {
 
     @Steps
     GetBuildingImage getBuildingImage;
+
+    @Steps
+    PostBuilding postBuilding;
 
     @Given("I set an endpoint for GET building")
     public void iSetAnEndpointForGETBuilding() {
@@ -58,5 +62,25 @@ public class BuildingSteps {
     @And("validate the {string} and data building image")
     public void validateTheAndDataBuildingImage(String message) {
         getBuildingImage.validateTheDataDetailsOfBuildingImage(message);
+    }
+
+    @Given("I set an endpoint for POST building")
+    public void iSetAnEndpointForPOSTBuilding() {
+        postBuilding.setPostEndpointBuilding();
+    }
+
+    @When("I request POST detail building with {string}, input {int}, {string}, {string}, {string}, {string}, and {int}")
+    public void iRequestPOSTDetailBuildingWithInputComplexIdAnd(String status, int complexId, String name, String address, String description, String building_size, int capacity) throws IOException {
+        postBuilding.requestPostDetailBuilding(status, complexId, name, address, description, building_size, capacity);
+    }
+
+    @Then("I validate the status code for post building is {int}")
+    public void iValidateTheStatusCodeForPostBuildingIsStatusCode(int statusCode) {
+        postBuilding.validateStatusCode(statusCode);
+    }
+
+    @And("validate the {string} and data details after post building")
+    public void validateTheAndDataDetailsAfterPostBuilding(String message) {
+        postBuilding.validateDataDetailAfterPostBuilding(message);
     }
 }
