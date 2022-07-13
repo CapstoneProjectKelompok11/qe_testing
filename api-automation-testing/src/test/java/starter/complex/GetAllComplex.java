@@ -7,32 +7,20 @@ import net.thucydides.core.annotations.Step;
 import static org.hamcrest.Matchers.equalTo;
 import static utils.General.base_url;
 
-public class GetComplex {
+public class GetAllComplex {
 
     private String city;
 
     @Step("I set an endpoint for GET all complex")
-    public String setGetEndpointComplex(String city) {
-        if (city.equals("")) {
-            return base_url + "/complex";
-        } else {
-            return base_url + "/complex?city={city}";
-        }
+    public String setGetEndpointComplex() {
+        return base_url + "/complex";
     }
 
     @Step("I request GET detail complex")
-    public void requestGetDetailComplex(String city) {
-        if (city.equals("")) {
-            SerenityRest.given()
-                    .header("Content-Type", "application/json")
-                    .when().get(setGetEndpointComplex(city));
-        } else {
-            this.city = city;
-            SerenityRest.given()
-                    .pathParam("city", this.city)
-                    .header("Content-Type", "application/json")
-                    .when().get(setGetEndpointComplex(city));
-        }
+    public void requestGetDetailComplex() {
+        SerenityRest.given()
+                .header("Content-Type", "application/json")
+                .when().get(setGetEndpointComplex());
     }
 
     @Step("I validate the status code is for get all complex is {int}")
@@ -41,21 +29,14 @@ public class GetComplex {
     }
 
     @Step("validate the data details of complex")
-    public void validateTheDataDetailsOfComplex(String message) {
+    public void validateTheDataDetailsOfComplex() {
         SerenityRest.then().body("timestamp", equalTo(getTimestamp()));
         SerenityRest.then().body("status.code", equalTo("SUCCESS"));
         SerenityRest.then().body("status.message", equalTo("Success!"));
-        if (message.equals("existed")) {
-            SerenityRest.then().body("data[0].id", equalTo(getDataID()));
-            SerenityRest.then().body("data[0].complex_name", equalTo(getDataName()));
-            SerenityRest.then().body("data[0].city.id", equalTo(getDataCityID()));
-            SerenityRest.then().body("data[0].city.city_name", equalTo(this.city));
-        } else if (message.equals("get all data")) {
-            SerenityRest.then().body("data[0].id", equalTo(getDataID()));
-            SerenityRest.then().body("data[0].complex_name", equalTo(getDataName()));
-            SerenityRest.then().body("data[0].city.id", equalTo(getDataCityID()));
-            SerenityRest.then().body("data[0].city.city_name", equalTo(getDataCityName()));
-        }
+        SerenityRest.then().body("data[0].id", equalTo(getDataID()));
+        SerenityRest.then().body("data[0].complex_name", equalTo(getDataName()));
+        SerenityRest.then().body("data[0].city.id", equalTo(getDataCityID()));
+        SerenityRest.then().body("data[0].city.city_name", equalTo(getDataCityName()));
     }
 
     @Step("get timestamp from the response")

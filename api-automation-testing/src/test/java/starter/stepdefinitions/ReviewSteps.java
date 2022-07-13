@@ -6,8 +6,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import starter.auth.PostLogin;
-import starter.city.GetCity;
-import starter.city.PostCity;
 import starter.review.GetReview;
 import starter.review.PostReview;
 
@@ -47,7 +45,7 @@ public class ReviewSteps {
     @Given("I have logged in as user")
     public void iHaveLoggedInAsUser() throws Exception {
         postLogin.setPostEndpointLogin();
-        postLogin.requestPostDetailLogin("string", "string");
+        postLogin.requestPostDetailLogin("user@gmail.com", "user");
         postLogin.validateStatusCode(200);
     }
 

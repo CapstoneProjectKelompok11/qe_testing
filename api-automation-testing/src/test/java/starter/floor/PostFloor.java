@@ -90,12 +90,12 @@ public class PostFloor {
 //            SerenityRest.then().body("data.review", equalTo(this.review));
 //            SerenityRest.then().body("data.review_date", equalTo(getDataReviewDate()));
         } else if (message.equals("not found")){
-            SerenityRest.then().body("status", equalTo(400));
-            SerenityRest.then().body("error", equalTo("Bad Request"));
-            SerenityRest.then().body("path", equalTo("/api/admin/floor"));
-//            SerenityRest.then().body("status.code", equalTo("DATA_NOT_FOUND"));
-//            SerenityRest.then().body("status.message", equalTo("Data not found!"));
-//            SerenityRest.then().body("data", equalTo(null));
+//            SerenityRest.then().body("status", equalTo(400));
+//            SerenityRest.then().body("error", equalTo("Bad Request"));
+//            SerenityRest.then().body("path", equalTo("/api/admin/floor"));
+            SerenityRest.then().body("status.code", equalTo("DATA_NOT_FOUND"));
+            SerenityRest.then().body("status.message", equalTo("Data not found!"));
+            SerenityRest.then().body("data", equalTo(null));
         } else {
             SerenityRest.then().body("status.code", equalTo("UNKNOWN_ERROR"));
             SerenityRest.then().body("status.message", equalTo("Happened unknown error!"));
