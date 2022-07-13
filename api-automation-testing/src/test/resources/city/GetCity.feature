@@ -1,4 +1,4 @@
-Feature: City
+Feature: Get City
   As an admin
   I want to get data city
   So that I can see list of city and access the detail data city
