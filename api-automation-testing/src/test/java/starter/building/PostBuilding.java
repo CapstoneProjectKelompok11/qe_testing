@@ -49,7 +49,7 @@ public class PostBuilding {
         if (building_size.equals("existed")) {
             this.buildingSize = "290 x 290 m2";
         } else if (building_size.equals("new")){
-            this.buildingSize = "35 m2";
+            this.buildingSize = "350 x 200 m2";
         } else {
             this.buildingSize = building_size;
         }
@@ -100,7 +100,7 @@ public class PostBuilding {
         } else if (message.equals("not found")){
             SerenityRest.then().body("status.code", equalTo("DATA_NOT_FOUND"));
             SerenityRest.then().body("status.message", equalTo("Data not found!"));
-//            SerenityRest.then().body("data", equalTo(null));
+            SerenityRest.then().body("data", equalTo(null));
         } else {
             SerenityRest.then().body("status.code", equalTo("UNKNOWN_ERROR"));
             SerenityRest.then().body("status.message", equalTo("Happened unknown error!"));

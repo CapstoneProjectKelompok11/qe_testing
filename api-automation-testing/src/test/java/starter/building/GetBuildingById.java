@@ -10,7 +10,7 @@ import java.io.IOException;
 import static org.hamcrest.Matchers.equalTo;
 import static utils.General.base_url;
 
-public class GetBuilding {
+public class GetBuildingById {
 
     private int id;
 
