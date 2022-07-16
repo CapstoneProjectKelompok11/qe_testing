@@ -7,6 +7,7 @@ import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
@@ -104,6 +105,12 @@ public class PostReview {
     public int getDataUserID() {
         Response response = SerenityRest.lastResponse();
         int userId = response.body().path("data.user.id");
+        try (FileWriter file = new FileWriter("src//test//resources//filejson//userId.json")){
+            file.write(userId);
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println("ID: " + userId);
         return userId;
     }
