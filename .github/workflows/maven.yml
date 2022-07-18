@@ -5,9 +5,9 @@ name: API Automation Java with Maven
 
 on:
   push:
-    branches: [ 'main' ]
+    branches: [ main ]
   pull_request:
-    branches: [ 'main' ]
+    branches: [ main ]
 
 defaults:
   run:
